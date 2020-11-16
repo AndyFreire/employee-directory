@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import Employees from "../Employees";
 
 export default class EmployeeList extends Component {
+
+    state = {
+        users: [{}],
+        order: "descending"
+    }
 
     // When component mounts, get all the users from randomuser.me and assign to the state of EmployeeList
     componentDidMount() {
@@ -18,7 +24,7 @@ export default class EmployeeList extends Component {
     render() {
         return (
             <div>
-
+                <Employees users={this.state.users} />
             </div>
         );
       }
