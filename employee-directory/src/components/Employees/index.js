@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 function Employees({ users }) {
 
@@ -10,9 +11,10 @@ function Employees({ users }) {
                 const email = user.email;
 
                 return (
-                    <tbody>
+                    <div className="user-cell">
+                        <tbody className="w-100">
                         <tr>
-                            <td data-th="Image" className="align-middle">
+                            <td data-th="Image" className="align-middle profile-image">
                                 <img src={profilePic} className="img-responsive" />
                             </td>
                             <td data-th="Name" className="name-cell align-middle">
@@ -23,6 +25,8 @@ function Employees({ users }) {
                             </td>
                         </tr>
                     </tbody>
+
+                    </div>
                 );
             })
         );

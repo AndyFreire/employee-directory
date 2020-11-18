@@ -8,7 +8,7 @@ export default class Main extends Component {
   state = {
     users: [{}],
     newUsers: [{}],
-    order: "descend"
+    order: "descending"
   }
 
   UpdateSearch = event => {
@@ -36,7 +36,7 @@ export default class Main extends Component {
 
       this.setState({
         users: allUsers,
-        order: 'descend',
+        order: 'descending',
         newUsers: allUsers
       });
     });
