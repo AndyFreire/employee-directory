@@ -5,43 +5,49 @@ import API from "../../utils/API";
 
 export default class Main extends Component {
 
-    state = {
-        users: [{}],
-        order: "descend"
-      }
+  state = {
+    users: [{}],
+    newUsers: [{}],
+    order: "descend"
+  }
 
-    UpdateSearch = event => {
-        const searchTerm = event.target.value;
-        console.log(searchTerm)
+  UpdateSearch = event => {
+    const searchTerm = event.target.value;
+    console.log(searchTerm)
 
-        const allUsers = this.state.users;
+    const allUsers = this.state.users;
 
-        const newUsers = allUsers.filter(user => {
+    const newUsers = allUsers.filter(user => {
 
-          let values = Object.values(user).join("").toLowerCase();
-          console.log(values);
+      // format the users for searchingg
+      let formattedUsers = Object.values(user).join("").toLowerCase();
+      console.log(formattedUsers);
 
-          return values.indexOf(searchTerm.toLowerCase()) !== -1;
-        });
-        console.log(newUsers);
-        this.setState({ users: newUsers });
-      }
+      return formattedUsers.indexOf(searchTerm.toLowerCase()) !== -1;
+    });
+    console.log(newUsers);
+    this.setState({ newUsers: newUsers });
+  }
 
-      componentDidMount() {
-        API.getRandomUsers().then(results => {
-          this.setState({
-            users: results.data.results,
-            order: 'descend'
-          });
-        });
-      }
+  componentDidMount() {
+    API.getRandomUsers().then(results => {
 
-    render(){
-        return (
-            <div className="main">
-                <SearchBar UpdateSearch={this.UpdateSearch} />
-                <EmployeeList users={this.state.users}/>
-            </div>
-        );
-    }
+      const allUsers = results.data.results;
+
+      this.setState({
+        users: allUsers,
+        order: 'descend',
+        newUsers: allUsers
+      });
+    });
+  }
+
+  render() {
+    return (
+      <div className="main">
+        <SearchBar UpdateSearch={this.UpdateSearch} />
+        <EmployeeList users={this.state.newUsers} />
+      </div>
+    );
+  }
 }
